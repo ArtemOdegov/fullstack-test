@@ -1,0 +1,256 @@
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+.app__header h1 {
+  margin: 0 0 4px;
+  font-size: 28px;
+}
+
+.app__header p {
+  margin: 0;
+  color: #5c6478;
+}
+
+.app__badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.app__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.pane {
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+.pane__header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.pane__header span {
+  color: #5c6478;
+  font-size: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5c6478;
+}
+
+input[type='text'],
+input[type='search'] {
+  border-radius: 12px;
+  border: 1px solid #d7dce9;
+  padding: 10px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+  border-color: #6366f1;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px dashed #d7dce9;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+  background: #4338ca;
+  color: #fff;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 15px 30px rgba(67, 56, 202, 0.2);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.list {
+  border: 1px solid #edf1f7;
+  border-radius: 16px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 240px;
+  background: #fbfcff;
+}
+
+.list__state {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 14px;
+  text-align: center;
+}
+
+.list__sentinel {
+  text-align: center;
+  padding: 12px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #e4e9f3;
+  background: #fff;
+}
+
+.item-row__id {
+  font-weight: 600;
+  color: #111827;
+}
+
+.item-row__action {
+  background: #0ea5e9;
+}
+
+.item-row__action:hover:not(:disabled) {
+  box-shadow: 0 10px 20px rgba(14, 165, 233, 0.25);
+}
+
+.item-row__action--danger {
+  background: #f97316;
+}
+
+.item-row__action--danger:hover:not(:disabled) {
+  box-shadow: 0 10px 20px rgba(249, 115, 22, 0.25);
+}
+
+.item-row--sortable {
+  gap: 16px;
+}
+
+.item-row__drag {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: grab;
+  box-shadow: none;
+}
+
+.item-row__drag:active {
+  cursor: grabbing;
+  transform: none;
+  box-shadow: none;
+}
+
+.item-row__drag:hover:not(:disabled) {
+  transform: none;
+  box-shadow: none;
+}
+
+.item-row--dragging {
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.15);
+  border-color: #c7d2fe;
+}
+
+.hint {
+  margin: 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+.hint--success {
+  color: #16a34a;
+}
+
+.hint--error {
+  color: #dc2626;
+}
+
+.hint--pending {
+  color: #4338ca;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 16px;
+  }
+
+  .app__header {
+    flex-direction: column;
+  }
+
+  .pane {
+    padding: 20px;
+  }
+}
