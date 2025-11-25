@@ -355,7 +355,7 @@ function App() {
                 </div>
               );
             })}
-            <div ref={leftSentinelRef} className="list__sentinel">
+            <div key={unselected.items.length} ref={leftSentinelRef} className="list__sentinel">
               {unselected.isAppending
                 ? 'Загружаем ещё...'
                 : unselected.hasMore
@@ -404,7 +404,7 @@ function App() {
                 </SortableContext>
               </DndContext>
             )}
-            <div ref={rightSentinelRef} className="list__sentinel">
+            <div key={selected.items.length} ref={rightSentinelRef} className="list__sentinel">
               {selected.isAppending
                 ? 'Загружаем ещё...'
                 : selected.hasMore
