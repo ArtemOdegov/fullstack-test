@@ -97,12 +97,18 @@ const useInfiniteTrigger = (loadMore: () => void, enabled: boolean) => {
     if (!node) {
       return;
     }
-    observerRef.current = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      if (entry?.isIntersecting && enabledRef.current) {
-        loadRef.current();
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting && enabledRef.current) {
+          loadRef.current();
+        }
+      },
+      {
+        rootMargin: '100px',
+        threshold: 0.1,
       }
-    });
+    );
     observerRef.current.observe(node);
   }, []);
 };
