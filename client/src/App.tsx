@@ -238,6 +238,9 @@ function App() {
 
       const reordered = arrayMove(selected.items, from, to);
       selected.updateItems(() => reordered);
+      const start = Math.min(from, to);
+      const end = Math.max(from, to);
+      const windowSlice = reordered.slice(start, end + 1);
 
       if (sortTimerRef.current) {
         clearTimeout(sortTimerRef.current);
@@ -247,8 +250,8 @@ function App() {
       setSortMessage('Сохраняем порядок...');
       try {
         await api.reorder({
-          ids: reordered,
-          offset: 0,
+          ids: windowSlice,
+          offset: start,
           search: selected.search,
         });
         setSortStatus('success');
@@ -297,7 +300,7 @@ function App() {
   return (
     <div className="app">
       <header className="app__header">
-        <div>
+      <div>
           <h1>Менеджер ID</h1>
           <p>1 000 000 базовых элементов + пользовательские значения.</p>
         </div>
@@ -309,7 +312,7 @@ function App() {
           <div className="pane__header">
             <h2>Доступные элементы</h2>
             <span>Левая колонка показывает все ID кроме выбранных</span>
-          </div>
+      </div>
 
           <label className="field">
             <span className="field__label">Поиск по ID</span>
@@ -334,7 +337,7 @@ function App() {
             </label>
             <button type="submit" disabled={addStatus === 'pending'}>
               {addStatus === 'pending' ? 'Отправляем...' : 'Добавить'}
-            </button>
+        </button>
           </form>
           {addMessage && (
             <p className={clsx('hint', { 'hint--error': addStatus === 'error', 'hint--success': addStatus === 'ok' })}>
@@ -369,7 +372,7 @@ function App() {
           <div className="pane__header">
             <h2>Выбранные элементы</h2>
             <span>Drag&Drop сохраняет порядок на сервере</span>
-          </div>
+      </div>
 
           <label className="field">
             <span className="field__label">Поиск по ID</span>
