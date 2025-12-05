@@ -17,7 +17,7 @@ const formatError = (error: unknown) => {
         return parsed.message as string;
       }
     } catch {
-      /* ignore json parse */
+      void 0;
     }
     return error.message;
   }
