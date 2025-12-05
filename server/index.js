@@ -219,16 +219,22 @@ app.post('/api/items/reorder', (req, res) => {
     return res.status(400).json({ message: 'Окно сортировки не соответствует текущим данным' });
   }
 
-  filtered.splice(offset, ids.length, ...ids);
+  const windowIds = filtered.slice(offset, offset + ids.length);
+  const windowSet = new Set(windowIds);
 
-  const filteredSet = new Set(filtered);
-  let filteredIndex = 0;
+  const positionsInFullOrder = [];
   for (let i = 0; i < selectedOrder.length; i += 1) {
-    if (!filteredSet.has(selectedOrder[i])) {
-      continue;
+    if (windowSet.has(selectedOrder[i])) {
+      positionsInFullOrder.push(i);
     }
-    selectedOrder[i] = filtered[filteredIndex];
-    filteredIndex += 1;
+  }
+
+  if (positionsInFullOrder.length !== ids.length) {
+    return res.status(400).json({ message: 'Не удалось найти все элементы окна в полном списке' });
+  }
+
+  for (let i = 0; i < ids.length; i += 1) {
+    selectedOrder[positionsInFullOrder[i]] = ids[i];
   }
 
   res.json({ selected: selectedOrder });
